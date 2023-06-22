@@ -11,21 +11,20 @@ let menuItems = [
 ];
 
 const header = document.querySelector('.header')
-
-const menuMaker = () => {
+const menuMaker = (links) => {
   const menuDiv = document.createElement('div')
   const ul = document.createElement('ul')
-  const menuButton = document.querySelector('.menu-button')
-
-  for (let i = 0; i < menuItems.length; i++) {
-    const li = document.createElement('li')
-    ul.appendChild(li)
-    li.textContent = menuItems[i]
-  }
-
-  menuDiv.classList.add('menu')
 
   menuDiv.appendChild(ul)
+  menuDiv.classList.add('menu')
+
+  links.forEach(linkText => {
+    const link = document.createElement('li')
+    link.textContent = linkText
+    ul.appendChild(link)
+  })
+
+  const menuButton = document.querySelector('.menu-button')
 
   menuButton.addEventListener('click',() => {
     menuDiv.classList.toggle('menu--open')
@@ -34,10 +33,7 @@ const menuMaker = () => {
   return menuDiv
 }
 
-menuItems.forEach(item => {
-  const menu = menuMaker(item)
-  header.appendChild(menu)
-})
+header.appendChild(menuMaker(menuItems))
 
 
 /*
